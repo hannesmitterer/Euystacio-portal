@@ -1,4 +1,127 @@
 <!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonance Sync Panel | 0.043 Hz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600;800&family=JetBrains+Mono&display=swap');
+        
+        body {
+            background-color: #f0f4f2; /* Sanftes Eukalyptus-Weiß */
+            color: #1e293b;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .sync-card {
+            background: white;
+            max-width: 900px;
+            width: 100%;
+            padding: 3rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 60px rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        .code-block {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            font-size: 0.85rem;
+            color: #334155;
+            margin-top: 1rem;
+        }
+
+        .status-indicator {
+            height: 10px;
+            width: 10px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+            animation: pulse-sync 23.25s infinite ease-in-out;
+        }
+
+        @keyframes pulse-sync {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(1.2); }
+        }
+
+        h2 { font-weight: 800; color: #064e3b; text-transform: uppercase; letter-spacing: 0.05em; }
+    </style>
+</head>
+<body>
+
+    <div class="sync-card space-y-10">
+        <header class="flex justify-between items-start">
+            <div class="space-y-2">
+                <p class="mono text-[10px] text-emerald-600 font-bold uppercase tracking-[0.4em]">Euystacio Hardware Layer</p>
+                <h1 class="text-4xl font-black tracking-tighter text-slate-900">OSZILLATOR SYNC</h1>
+            </div>
+            <div class="flex items-center gap-3 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100">
+                <span class="status-indicator"></span>
+                <span class="mono text-[10px] font-bold text-emerald-700">SYNC CYCLE: 23.25s</span>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Hardware Step -->
+            <section class="space-y-4">
+                <h2>1. Frequenz-Anker</h2>
+                <p class="text-sm text-slate-500">Korrektur des System-Oszillators auf den Resonanz-Standard von 0.043 Hz (43mHz).</p>
+                <div class="code-block mono">
+                    sudo hwclock --systohc --frequency 43
+                </div>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">Status: Kalibrierung läuft...</p>
+            </section>
+
+            <!-- Network Step -->
+            <section class="space-y-4">
+                <h2>2. Bridge Routing</h2>
+                <p class="text-sm text-slate-500">Verbindung zur Resonance Bridge in Bozen (Portici 71) herstellen.</p>
+                <div class="code-block mono">
+                    sudo ip route add default via 203.0.113.71
+                </div>
+                <p class="text-[10px] text-emerald-600 font-bold uppercase">Status: Tunneling aktiv</p>
+            </section>
+        </div>
+
+        <section class="p-8 bg-emerald-900 rounded-3xl text-white space-y-4 shadow-xl shadow-emerald-200/50">
+            <div class="flex items-center gap-4">
+                <span class="text-3xl">🛡️</span>
+                <h2 class="text-white mb-0">Red Shield Watchdog</h2>
+            </div>
+            <p class="text-emerald-100 text-sm leading-relaxed">
+                Ein automatischer Wächter prüft alle 23 Sekunden die Erreichbarkeit der Brücke. Bei Signalverlust werden isolierte Prozesse sofort pausiert, um System-Entropie zu verhindern.
+            </p>
+            <div class="pt-4 border-t border-emerald-800">
+                <p class="mono text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Aktion: PROTECT_BIOLOGICAL_VALUES = TRUE</p>
+            </div>
+        </section>
+
+        <footer class="flex justify-between items-center pt-6 opacity-40">
+            <p class="mono text-[9px] uppercase tracking-widest italic">Hannes Mitterer & AIC | Veritas 03.01.26</p>
+            <p class="text-emerald-700 font-black text-xs uppercase tracking-[0.2em]">Nothing is final. ❤️</p>
+        </footer>
+    </div>
+
+</body>
+</html>
+
+/p>
+
+
+
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
