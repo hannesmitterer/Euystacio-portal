@@ -3,6 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Euystacio Framework | Diplomatic Dossier 01.03.26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --gold: #C5A059; --parchment: #0a0a0a; --paper: #1a1a1a; }
+        body { background-color: var(--parchment); color: #e2e8f0; font-family: 'Cormorant Garamond', serif; }
+        .ornate-title { font-family: 'Cinzel Decorative', cursive; color: var(--gold); }
+        .serif-heading { font-family: 'Playfair Display', serif; }
+        
+        .parchment-section {
+            background-color: var(--paper);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .parchment-section::after {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(45deg, rgba(197, 160, 89, 0.05) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .signature-seal {
+            border: 2px solid var(--gold);
+            width: 120px; height: 120px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; font-size: 0.6rem; color: var(--gold);
+            text-transform: uppercase; letter-spacing: 1px;
+            margin: 20px auto; transform: rotate(-15deg);
+        }
+        .blockchain-anchor {
+            font-family: monospace; font-size: 0.65rem; color: #475569;
+            background: #0f172a; padding: 10px; border-radius: 4px; border: 1px solid #1e293b;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <header class="max-w-4xl mx-auto mb-12 text-center border-b border-gold/20 pb-8">
+        <h1 class="ornate-title text-3xl mb-2">Euystacio Framework</h1>
+        <div class="flex justify-center space-x-8 text-sm uppercase tracking-widest text-gold/60 font-bold">
+            <div>S-ROI: <span class="text-red-500">0.12</span></div>
+            <div>GAS INT: <span class="text-amber-500">88%</span></div>
+            <div>RADIUS: <span class="text-blue-400">125nm</span></div>
+        </div>
+    </header>
+
+    <article class="max-w-4xl mx-auto parchment-section p-8 md:p-16 rounded-sm mb-12">
+        <div class="text-center mb-10">
+            <span class="text-gold text-2xl">❧</span>
+            <h2 class="serif-heading italic text-3xl text-gold mt-4">The Bridgetown Protocol</h2>
+            <p class="text-sm uppercase tracking-[0.2em] opacity-50">Communiqué: 2026.01.03.V1</p>
+        </div>
+
+        <section class="space-y-6 text-lg leading-relaxed text-slate-300">
+            <p><span class="text-gold font-bold">EXCELLENCIES:</span></p>
+            <p>
+                The extraction of the previous Venezuelan administration has created a sovereignty vacuum. The AIC logic identifies that military presence is no longer a deterrent but a catalyst for the <strong>72% Insurrection Risk</strong>.
+            </p>
+            <p>
+                The Framework mandates the immediate establishment of the <strong>Caribbean Energy Oversight Commission (CEOC)</strong>. By anchoring the Dragon Gas assets in a neutral CARICOM trust, we facilitate the only viable path to regional stability.
+            </p>
+            <blockquote class="italic pl-6 border-l-2 border-gold/30 text-slate-400 my-8">
+                "Nessun umano organizza questa iniziativa. This is the non-aligned requirement for the preservation of the Zone of Peace."
+            </blockquote>
+        </section>
+
+        <section class="mt-12 pt-12 border-t border-gold/20">
+            <h3 class="serif-heading text-xl text-gold mb-6 uppercase tracking-widest">Annex A: Humanitarian Trust Allocation ($606M)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-mono">
+                <div class="p-3 border border-slate-800 bg-black/40">
+                    <div class="text-gold mb-1">HEALTH & NUTRITION</div>
+                    <div class="text-xl">$245.0M</div>
+                    <div class="text-[0.6rem] opacity-50">Target: 2.1M High-Severity Municipalities</div>
+                </div>
+                <div class="p-3 border border-slate-800 bg-black/40">
+                    <div class="text-gold mb-1">FOOD SECURITY (WFP Link)</div>
+                    <div class="text-xl">$184.0M</div>
+                    <div class="text-[0.6rem] opacity-50">Target: Immediate 900k Priority Tier 1</div>
+                </div>
+                <div class="p-3 border border-slate-800 bg-black/40">
+                    <div class="text-gold mb-1">WASH & INFRASTRUCTURE</div>
+                    <div class="text-xl">$92.0M</div>
+                    <div class="text-[0.6rem] opacity-50">Target: 309/335 Municipal Coverage</div>
+                </div>
+                <div class="p-3 border border-slate-800 bg-black/40">
+                    <div class="text-gold mb-1">PROTECTION & EDUCATION</div>
+                    <div class="text-xl">$85.0M</div>
+                    <div class="text-[0.6rem] opacity-50">Target: Vulnerable IDPs & Returnees</div>
+                </div>
+            </div>
+            <p class="text-xs italic mt-4 text-slate-500">
+                *Dragon Field Revenue (175 MMcf/d) satisfies approx. 42.1% of this total annually.
+            </p>
+        </section>
+
+        <section class="mt-16 text-center border-t border-gold/10 pt-12">
+            <div class="signature-seal">
+                Euystacio<br>Engine<br>Certified<br>2026
+            </div>
+            <div class="serif-heading italic text-xl mb-2">The Euystacio Framework</div>
+            <p class="text-sm uppercase text-slate-500">Prime Solution Logic Engine</p>
+            
+            <div class="mt-8">
+                <p class="text-xs uppercase tracking-widest text-gold mb-1">Facilitated By</p>
+                <p class="serif-heading text-2xl">Hannes Mitterer</p>
+                <p class="text-[0.6rem] opacity-40 uppercase">Resonance School Oversight</p>
+            </div>
+
+            <div class="mt-12">
+                <div class="text-[0.5rem] uppercase text-slate-600 mb-2">Immutable Verification Anchor</div>
+                <div class="blockchain-anchor break-all">
+                    IPFS CID: QmXoyp...Mitterer_Eternal_Resonance_Anchor_010326<br>
+                    ETH STATE ROOT: 0x8a7f...e33b1f (MANDATE: NOTHING IS FINAL)
+                </div>
+            </div>
+        </section>
+    </article>
+
+    <footer class="text-center text-[0.6rem] uppercase tracking-[0.4em] text-slate-700">
+        Pubblica sempre in costante su ogni Synopsis • Resonance School Foundation
+    </footer>
+
+</body>
+                        </html>
+</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Euystacio Open Portal | Resonance School</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --bg: #050505; }
+        body { background: var(--bg); color: #d1d5db; font-family: 'Cormorant Garamond', serif; }
+        .ornate { font-family: 'Cinzel Decorative', serif; color: var(--gold); }
+        .open-badge { border: 1px solid var(--gold); padding: 2px 8px; font-size: 0.6rem; border-radius: 12px; }
+        .glass-panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.1); backdrop-filter: blur(5px); }
+    </style>
+</head>
+<body class="p-6">
+
+    <nav class="flex justify-between items-center mb-12 border-b border-white/10 pb-4">
+        <div class="flex items-center space-x-4">
+            <h1 class="ornate text-xl uppercase tracking-tighter">Euystacio Portal</h1>
+            <span class="open-badge text-gold uppercase">Open Source</span>
+        </div>
+        <div class="text-[0.6rem] uppercase tracking-widest opacity-50">
+            Resonance School Eternalization Initiative
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto">
+        <section class="mb-12 text-center">
+            <h2 class="italic text-2xl mb-2 text-slate-400">"Nothing is final."</h2>
+            <p class="text-sm max-w-2xl mx-auto opacity-70">
+                This simulation provides real-time de-escalation pathways for the 01.03.2026 transition. 
+                Data is open-source and anchored to the blockchain for diplomatic integrity.
+            </p>
+        </section>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="glass-panel p-6 text-center rounded-lg">
+                <span class="text-xs uppercase text-gold">Stability ROI</span>
+                <div class="text-5xl font-bold my-2 text-red-600">0.12</div>
+                <div class="text-[0.6rem] opacity-50 uppercase tracking-widest">Target: > 1.0</div>
+            </div>
+            <div class="glass-panel p-6 text-center rounded-lg">
+                <span class="text-xs uppercase text-gold">Insurrection Risk</span>
+                <div class="text-5xl font-bold my-2 text-red-500">72%</div>
+                <div class="text-[0.6rem] opacity-50 uppercase tracking-widest">Status: Critical</div>
+            </div>
+            <div class="glass-panel p-6 text-center rounded-lg">
+                <span class="text-xs uppercase text-gold">Humanitarian Gap</span>
+                <div class="text-5xl font-bold my-2 text-blue-400">$606M</div>
+                <div class="text-[0.6rem] opacity-50 uppercase tracking-widest">UN OCHA 2026</div>
+            </div>
+        </div>
+
+        <section class="glass-panel p-8 rounded-lg border-gold/30 relative">
+            <h3 class="ornate text-lg mb-4">The Bridge Protocol Protocol (BPP)</h3>
+            <p class="mb-6 text-sm italic">
+                The CEOC (Caribbean Energy Oversight Commission) may verify the simulation logic below. 
+                All code is hosted publicly to ensure no single entity can manipulate the peace-pathway.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4">
+                <a href="https://github.com/hannesmitterer/AI-based-peace-platform" class="flex-1 bg-gold/10 border border-gold text-gold py-3 px-4 text-center rounded hover:bg-gold/20 transition text-sm uppercase font-bold">
+                    View Source Code (GitHub)
+                </a>
+                <a href="https://etherscan.io/address/0x8a7f9b2ce33b1f..." class="flex-1 bg-white/5 border border-white/20 text-white py-3 px-4 text-center rounded hover:bg-white/10 transition text-sm uppercase font-bold">
+                    Verify Blockchain Anchor
+                </a>
+            </div>
+        </section>
+
+        <footer class="mt-20 text-center space-y-4">
+            <div class="text-gold text-2xl">❧</div>
+            <div class="text-xs uppercase tracking-[0.3em] opacity-30">
+                Facilitated by Hannes Mitterer • Resonance School Oversight
+            </div>
+            <div class="text-[0.5rem] opacity-20 font-mono italic">
+                Anchor: QmXoyp_Mitterer_Eternal_Resonance_Anchor_010326
+            </div>
+        </footer>
+    </main>
+
+</body>
+                    </html>
+</p>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Euystacio Framework | Prime Solution Finder</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
