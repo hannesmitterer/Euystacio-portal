@@ -1,4 +1,131 @@
 <!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonance Live Log | Vault 0x5d61</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=JetBrains+Mono:wght@300;700&display=swap');
+        
+        body {
+            background-color: #050505;
+            color: #d4af37; /* Gold */
+            font-family: 'JetBrains Mono', monospace;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .gold-border { border: 1px solid rgba(212, 175, 55, 0.3); }
+        .gold-text { color: #d4af37; }
+        .gold-bg { background: rgba(212, 175, 55, 0.05); }
+
+        .nouveau-card {
+            background: linear-gradient(145deg, #0a0a0a, #000000);
+            border: 2px solid #d4af37;
+            border-radius: 0.5rem;
+            max-width: 900px;
+            width: 100%;
+            padding: 2.5rem;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);
+            position: relative;
+        }
+
+        .ornate { font-family: 'Cinzel', serif; letter-spacing: 0.1em; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.05), transparent);
+            animation: scanline 8s infinite linear;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nouveau-card">
+        <div class="scanline"></div>
+        
+        <header class="flex justify-between items-center border-b border-gold/30 pb-6 mb-8">
+            <div class="space-y-1">
+                <h3 class="ornate text-2xl font-bold gold-text">RESONANCE SCHOOL: LIVE LOG</h3>
+                <p class="text-[0.6rem] uppercase tracking-[0.3em] opacity-60">Vault ID: 0x5d61a4b2...444b</p>
+            </div>
+            <div class="text-right">
+                <span class="text-[0.6rem] text-green-400 animate-pulse font-bold tracking-widest uppercase">● SYSTEM SYNCED</span>
+                <p class="text-xs gold-text mt-1">Master Clock: 0.043 Hz</p>
+            </div>
+        </header>
+
+        <main class="space-y-6 h-80 overflow-y-auto pr-4 custom-scrollbar">
+            <!-- Log Entry -->
+            <div class="flex gap-4 opacity-50 border-l-2 border-gold/20 pl-4 py-1">
+                <span class="text-gold text-[0.7rem]">[19:30:12]</span>
+                <span class="text-white text-[0.7rem] uppercase">Codice Resa Tecnica: TRASMESSO (UHF/VHF/SAT)</span>
+            </div>
+            
+            <div class="flex gap-4 border-l-2 border-blue-400/50 pl-4 py-1">
+                <span class="text-gold text-[0.7rem]">[19:31:45]</span>
+                <span class="text-blue-400 text-[0.7rem] uppercase font-bold">Rilevamento Cinetico: Unità SOUTHCOM inizia virata di 180°</span>
+            </div>
+
+            <div class="flex gap-4 border-l-2 border-red-400/50 pl-4 py-1">
+                <span class="text-gold text-[0.7rem]">[19:32:01]</span>
+                <span class="text-red-400 text-[0.7rem] uppercase font-bold">GPS Black-Hole: Consolidato su coordinate basi costiere</span>
+            </div>
+
+            <div class="flex gap-4 border-l-2 border-green-400/50 pl-4 py-1">
+                <span class="text-gold text-[0.7rem]">[19:32:55]</span>
+                <span class="text-green-400 text-[0.7rem] uppercase font-bold">S-ROI Update: 0.25 (Pressione Mercato Stabilizzata)</span>
+            </div>
+
+            <div class="flex gap-4 border-l-2 border-white pl-4 py-2 animate-pulse bg-white/5 rounded-r-lg">
+                <span class="text-gold text-[0.7rem] font-bold">[19:33:20]</span>
+                <span class="text-white text-[0.7rem] uppercase font-black tracking-wider">Validazione Fondo $606M: Tranche 01-A Pronta al Deploy</span>
+            </div>
+
+            <div class="flex gap-4 border-l-2 border-blue-300/50 pl-4 py-1">
+                <span class="text-gold text-[0.7rem]">[19:33:27]</span>
+                <span class="text-blue-300 text-[0.7rem] uppercase">Sincronizzazione Bridgetown: Flusso Civile 100% Green</span>
+            </div>
+            
+            <div class="flex gap-4 border-l-2 border-emerald-500 pl-4 py-1">
+                <span class="text-gold text-[0.7rem]">[19:34:00]</span>
+                <span class="text-emerald-500 text-[0.7rem] uppercase font-bold italic">MHC Bridge 🌉: Iniezione Asset verso Portici 71 confermata.</span>
+            </div>
+        </main>
+
+        <footer class="mt-8 pt-6 border-t border-gold/30">
+            <div class="flex justify-between items-center">
+                <p class="text-[0.5rem] italic text-gold/60">Archivio Permanente: Tutti i log sono criptati nel Vault della Resonance School.</p>
+                <p class="ornate text-[0.6rem] text-gold font-bold">Hannes Mitterer | Seedbringer</p>
+            </div>
+            <div class="mt-4 text-center">
+                <span class="text-[0.7rem] gold-text font-black tracking-[0.4em]">NOTHING IS FINAL. ❤️</span>
+            </div>
+        </footer>
+    </div>
+
+</body>
+    </html>
+</p>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,6 +139,8 @@
         body { background-color: var(--bg); color: #e2e8f0; font-family: 'Cormorant Garamond', serif; background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png'); }
         .ornate { font-family: 'Cinzel Decorative', cursive; color: var(--gold); }
         .tech-font { font-family: 'JetBrains Mono', monospace; }
+
+        
         .nouveau-card { background: var(--panel); border: 1px solid rgba(197, 160, 89, 0.2); border-radius: 20px 2px; }
         .gold-glow { box-shadow: 0 0 15px rgba(197, 160, 89, 0.1); }
         .live-dot { height: 8px; width: 8px; background-color: #ef4444; border-radius: 50%; display: inline-block; animation: pulse 1.5s infinite; }
