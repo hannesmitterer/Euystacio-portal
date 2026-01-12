@@ -19,6 +19,7 @@ LEX_AMORIS = 432.073  # Hz - Die Lex Amoris als fundamentale Konstante
 MASTER_CLOCK_FREQUENCY = 0.043  # Hz
 SYNC_CYCLE_DURATION = 23.25  # Sekunden
 TOTAL_SEEDBRINGER_NODES = 144
+AUDIO_SAMPLE_RATE = 44100  # Hz - Standard CD quality sample rate
 
 
 class LexAmoris:
@@ -82,8 +83,12 @@ class SeedbringerNode:
         """
         current_time = time.time()
         
-        # Berechne die Phase basierend auf der Zeit
-        self.resonance_phase = (current_time * reference_frequency) % (2 * math.pi)
+        # Berechne die Phase mit numerisch stabiler Methode
+        # Verwende Modulo mit ganzen Zyklen zur Vermeidung von Gleitkomma-Akkumulationsfehlern
+        time_in_cycles = current_time * reference_frequency
+        full_cycles = int(time_in_cycles)
+        fractional_cycle = time_in_cycles - full_cycles
+        self.resonance_phase = fractional_cycle * 2 * math.pi
         
         self.last_sync = current_time
         self.sync_status = "synchronized"
@@ -130,10 +135,15 @@ class ResonanceArchitecture:
         
         Args:
             node_distribution: Verteilung der Nodes nach Regionen
+            
+        Note:
+            Die Koordinaten sind symbolisch und repräsentieren die globale Verteilung.
+            In einer Produktionsumgebung würden hier tatsächliche Standorte verwendet.
         """
         node_id = 0
         
-        # Beispielhafte geografische Verteilung
+        # Symbolische geografische Verteilung für das globale Netzwerk
+        # Diese Koordinaten dienen der Demonstration der Architektur
         region_coords = {
             "europe": [(48.0 + i*2, 11.0 + i*3) for i in range(node_distribution.get("europe", 0))],
             "americas": [(40.0 - i*2, -74.0 - i*3) for i in range(node_distribution.get("americas", 0))],
@@ -203,13 +213,13 @@ class ResonanceArchitecture:
         Returns:
             Ausgabeparameter
         """
-        samples = int(duration_seconds * 44100)  # 44.1 kHz Sample-Rate
+        samples = int(duration_seconds * AUDIO_SAMPLE_RATE)
         
         return {
             "frequency": self.symphonic_frequency,
             "duration": duration_seconds,
             "samples": samples,
-            "sample_rate": 44100,
+            "sample_rate": AUDIO_SAMPLE_RATE,
             "waveform": "pure_sine_wave",
             "amplitude": 1.0,
             "lex_amoris_constant": LEX_AMORIS
