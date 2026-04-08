@@ -120,6 +120,51 @@
                 </div>
         </div>
     </main>
+    <section class="col-span-full mt-10">
+    <div class="glass p-8 rounded-3xl border border-red-500/20 shadow-[0_0_50px_rgba(239,68,68,0.1)]">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div>
+                <h3 class="text-xl font-bold text-white flex items-center gap-3">
+                    <i class="fas fa-shield-halved text-red-500 animate-pulse"></i>
+                    Sovereign Control Panel
+                </h3>
+                <p class="text-[10px] mono text-gray-500 uppercase tracking-widest">NSR Status: <span id="nsr-status-text" class="text-red-500">OFFLINE</span></p>
+            </div>
+            <div class="flex gap-4">
+                <button onclick="runNSRActivation()" id="nsr-btn" class="bg-red-600/20 hover:bg-red-600 border border-red-600/50 text-red-400 hover:text-white px-6 py-2 rounded-full text-[10px] mono transition-all duration-300">
+                    ACTIVATE NSR
+                </button>
+                <button onclick="recalibrateFrequency()" class="bg-blue-600/20 hover:bg-blue-600 border border-blue-600/50 text-blue-400 hover:text-white px-6 py-2 rounded-full text-[10px] mono transition-all duration-300">
+                    SYNC 0.043 Hz
+                </button>
+            </div>
+        </div>
+
+        <div class="bg-black/60 rounded-xl p-4 mono text-[10px] h-48 overflow-y-auto border border-white/5" id="terminal-output">
+            <div class="text-gray-500">[SYSTEM] Attesa comando sovrano...</div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            <div class="bg-white/5 p-3 rounded-lg text-center">
+                <span class="block text-[9px] text-gray-500 uppercase">Ethical Affinity</span>
+                <span id="affinity-score" class="text-lg font-bold text-red-500">0.34</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-lg text-center">
+                <span class="block text-[9px] text-gray-500 uppercase">Hallucination Rate</span>
+                <span id="hallucination-rate" class="text-lg font-bold text-orange-500">48%</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-lg text-center">
+                <span class="block text-[9px] text-gray-500 uppercase">Active Nodes</span>
+                <span class="text-lg font-bold text-blue-400">144,000</span>
+            </div>
+            <div class="bg-white/5 p-3 rounded-lg text-center">
+                <span class="block text-[9px] text-gray-500 uppercase">Power Load</span>
+                <span id="power-load" class="text-lg font-bold text-red-500">875 kW</span>
+            </div>
+        </div>
+    </div>
+    </section>
+    
 
     <footer class="mt-20 w-full max-w-6xl border-t border-white/5 pt-10 text-center">
         <div class="text-[9px] mono text-gray-600 uppercase tracking-[0.5em] mb-6">
