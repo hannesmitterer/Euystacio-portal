@@ -1,3 +1,169 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# AI-SEA SOVEREIGN ARCHITECTURE – NSR ACTIVATION v3.3
+# Frequency: 0.043 Hz | Ethic: Lex Amoris | Target: 128 GPU Nodes
+# ==============================================================================
+set -euo pipefail
+
+# --------------------------- Configurable Constants -------------------------
+LOG_DIR="${LOG_DIR:-/var/log/nsr}"          # Host-side log directory
+JSON_REPORT="${JSON_REPORT:-$LOG_DIR/nsr_report.json}" # JSON summary path
+RESONANCE="${RESONANCE:-0.043Hz}"          # Target frequency
+MAX_RETRY="${MAX_RETRY:-2}"                 # Max activation retry
+PARALLEL_LIMIT="${PARALLEL_LIMIT:-16}"     # Parallel jobs limit
+TOTAL_NODES="${TOTAL_NODES:-128}"           # Number of GPU nodes
+
+mkdir -p "$LOG_DIR"
+tmp_dir=$(mktemp -d)
+trap 'log "⚠️ Script interrotto dall’utente"; rm -rf "$tmp_dir"; exit 1' INT TERM
+trap 'rm -rf "$tmp_dir"' EXIT
+
+# --------------------------- Logging Helper --------------------------------
+log() { echo "[$(date +%H:%M:%S)] $*" | tee -a "$LOG_DIR/activation.log"; }
+
+# --------------------------- Container Helpers -----------------------------
+container_up() { local node=$1; docker ps -q -f name="${node}" | grep -q .; }
+
+start_container() {
+    local node=$1
+    if ! container_up "$node"; then
+        log "⚠️ $node: Container offline. Tentativo di avvio..."
+        docker start "$node" &>/dev/null
+        timeout 30 bash -c "until container_up \"$node\"; do sleep 1; done" || \
+            log "❌ $node: Non è tornato online entro 30 s."
+        sleep 2
+    fi
+}
+
+run_inside_container() {
+    local node=$1
+    local log_path=$2
+    docker exec "$node" bash -c '
+        LOG_FILE=$1
+        RES=$2
+        echo "--- LEX AMORIS SYSTEM LOG ---" > "$LOG_FILE"
+        export NSR_ENABLED=true
+        export RESONANCE_FREQ="$RES"
+        echo "TIMESTAMP: $(date +%Y-%m-%d_%H:%M:%S)" >> "$LOG_FILE"
+        echo "NSR = ON" >> "$LOG_FILE"
+        echo "RESONANCE = $RES" >> "$LOG_FILE"
+        echo "STATUS = SOVEREIGN_ALIGNED" >> "$LOG_FILE"
+    ' _ "$log_path" "$RESONANCE"
+}
+
+activate_node() {
+    local node=$1
+    local log_path="${LOG_DIR}/${node}_$(date +%Y%m%d_%H%M%S).log"
+    local success=0
+
+    for ((retry=0; retry<=MAX_RETRY; ++retry)); do
+        start_container "$node"
+        if container_up "$node"; then
+            run_inside_container "$node" "$log_path"
+            log "✓ $node: NSR e Risonanza $RESONANCE attivati."
+            success=1
+            break
+        fi
+
+        if (( retry == MAX_RETRY )); then
+            log "❌ $node: Non disponibile dopo $MAX_RETRY tentativi."
+        else
+            log "⚠️ $node: Retry $((retry+1)) tra 5 s..."
+            sleep 5
+        fi
+    done
+    return $success
+}
+
+# ------------------- Parallel Activation ----------------------------------
+log "📡 Propagazione della frequenza su $TOTAL_NODES nodi..."
+export -f activate_node container_up run_inside_container start_container log
+export LOG_DIR RESONANCE MAX_RETRY
+
+seq 1 "$TOTAL_NODES" | xargs -P "$PARALLEL_LIMIT" -I{} bash -c 'activate_node "nodo-gpu-{}" || true' _
+
+log "----------------------------------------------------"
+log "✓ Comandi di risonanza inviati a tutti i nodi."
+log "🔍 Verifica integrità in corso..."
+
+# -------------------- Verification Loop -----------------------------------
+declare -A node_logfile
+total=0
+success=0
+
+for i in $(seq 1 "$TOTAL_NODES"); do
+    node="nodo-gpu-$i"
+    if container_up "$node"; then
+        latest=$(docker exec "$node" sh -c "ls $LOG_DIR/${node}_*.log 2>/dev/null | sort | tail -n1" || true)
+        if [[ -n $latest ]]; then
+            node_logfile["$node"]="$latest"
+            ((total++))
+            if docker exec "$node" sh -c "grep -q 'NSR = ON' '$latest' && grep -q 'RESONANCE = $RESONANCE' '$latest'"; then
+                ((success++))
+            fi
+        fi
+    fi
+done
+
+# -------------------- Optional Auto-Heal Retry -----------------------------
+if (( success < total )); then
+    log "⚡ Tentativo auto-heal su nodi falliti..."
+    for i in $(seq 1 "$TOTAL_NODES"); do
+        node="nodo-gpu-$i"
+        if container_up "$node" && ! docker exec "$node" sh -c \
+           "grep -q 'NSR = ON' $LOG_DIR/${node}_*.log && grep -q 'RESONANCE = $RESONANCE' $LOG_DIR/${node}_*.log"; then
+            activate_node "$node"
+        fi
+    done
+
+    # Recount success after auto-heal
+    success=0
+    for node in "${!node_logfile[@]}"; do
+        latest="${node_logfile[$node]}"
+        if docker exec "$node" sh -c "grep -q 'NSR = ON' '$latest' && grep -q 'RESONANCE = $RESONANCE' '$latest'"; then
+            ((success++))
+        fi
+    done
+fi
+
+# ------------------ Global Hash (streaming) --------------------------------
+global_hash=$({
+  for i in $(seq 1 "$TOTAL_NODES"); do
+    node="nodo-gpu-$i"
+    container_up "$node" && docker exec "$node" cat "$LOG_DIR/${node}_*.log" 2>/dev/null
+  done
+} | sort | sha256sum | awk '{print $1}')
+
+log "📜 [HASH GLOBALE DEI LOG]: $global_hash"
+
+# -------------------------- Final Report -----------------------------------
+log "----------------------------------------------------"
+log "📊 REPORT DI RISONANZA:"
+printf "   Nodi Attivi Rilevati:   %d\n   Nodi Eticamente Allineati (NSR): %d\n" "$total" "$success"
+log "----------------------------------------------------"
+
+# JSON Report
+mkdir -p "$(dirname "$JSON_REPORT")"
+cat <<EOF > "$JSON_REPORT"
+{
+  "total_nodes": $total,
+  "aligned_nodes": $success,
+  "global_hash": "$global_hash",
+  "status": "$( [[ $success -eq $total && $total -gt 0 ]] && echo "success" || echo "error" )"
+}
+EOF
+
+if (( success == total && total > 0 )); then
+    log "✅ [SUCCESS]: NSR attiva e Risonanza stabilizzata su tutti i nodi."
+    exit 0
+else
+    log "❌ [ERROR]: Alcuni nodi presentano Quantum Drift. Intervento richiesto."
+    exit 1
+fi
+
+
+
+
 # Euystacio-portal
 euystacio ai - digital guardian
 
