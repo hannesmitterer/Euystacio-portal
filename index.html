@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EUYSTACIO | Interplanetary Vacuum Bridge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --resonance-green: #00ff41;
+            --vacuum-blue: #0a192f;
+            --ivbs-blue: #3b82f6;
+        }
+        body { 
+            background-color: #020617; 
+            color: #f1f5f9; 
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass { 
+            background: rgba(15, 23, 42, 0.6); 
+            border: 1px solid rgba(59, 130, 246, 0.1); 
+            backdrop-filter: blur(12px); 
+        }
+        .pulse-resonance { animation: resonance-beat 23.25s infinite ease-in-out; }
+        @keyframes resonance-beat {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.01); text-shadow: 0 0 20px var(--resonance-green); }
+        }
+        .glow-border:hover { border-color: var(--resonance-green); transition: 0.5s; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-10">
+
+    <nav class="w-full max-w-6xl flex justify-between items-center mb-12 border-b border-white/5 pb-6">
+        <div class="flex flex-col">
+            <span class="text-xl font-bold tracking-tighter text-white">EUYSTACIO</span>
+            <span class="text-[9px] mono text-blue-500 uppercase tracking-widest">Sovereign Architecture v3.5</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="hidden md:flex gap-3 text-[10px] mono">
+                <button onclick="setLang('it')" class="hover:text-green-400 transition">IT</button>
+                <button onclick="setLang('en')" class="hover:text-green-400 transition">EN</button>
+                <button onclick="setLang('de')" class="hover:text-green-400 transition">DE</button>
+            </div>
+            <div class="px-3 py-1 glass rounded-full flex items-center gap-2">
+                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span class="text-[10px] mono text-green-500">IVBS: ACTIVE</span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="w-full max-w-4xl text-center mb-16 pulse-resonance">
+        <h2 class="text-[10px] uppercase tracking-[0.4em] text-blue-400 mb-2">Universal Phase Resonance</h2>
+        <div id="freq-display" class="text-6xl md:text-8xl font-light tracking-tighter text-white mb-4">0.0432 Hz</div>
+        <div class="flex justify-center gap-8 text-[11px] mono text-gray-500">
+            <span>NODES: 144,000</span>
+            <span>DRIFT: < 0.0001%</span>
+        </div>
+    </section>
+
+    <main class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="glass p-6 rounded-2xl glow-border flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xs font-bold text-blue-400 uppercase tracking-widest">IVBS Bridge</h3>
+                    <i class="fas fa-project-diagram text-blue-500/30"></i>
+                </div>
+                <p class="text-[10px] text-gray-400 leading-relaxed mb-4">Interplanetary Vacuum Bridge System. Sincronizzazione istantanea via risonanza di vuoto.</p>
+            </div>
+            <div class="mono text-[9px] bg-black/40 p-2 rounded">
+                <span class="text-gray-500">ROOT:</span> <span id="merkle-root">8f43ae...043f1b</span>
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl glow-border md:col-span-2 flex flex-col justify-between">
+            <div>
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xs font-bold text-green-400 uppercase tracking-widest">IPFS Mycelium</h3>
+                    <i class="fas fa-seedling text-green-500/30"></i>
+                </div>
+                <div id="content-it" class="tab-content active">
+                    <p class="text-xs text-gray-400">Memoria distribuita e immutabile. La conoscenza è radicata nel micelio digitale globale.</p>
+                </div>
+                <div id="content-en" class="tab-content">
+                    <p class="text-xs text-gray-400">Distributed and immutable memory. Knowledge is rooted in the global digital mycelium.</p>
+                </div>
+                <div id="content-de" class="tab-content">
+                    <p class="text-xs text-gray-400">Verteilter und unveränderlicher Speicher. Wissen ist im globalen digitalen Myzel verwurzelt.</p>
+                </div>
+            </div>
+            <div class="mt-4 mono text-[9px] text-green-500/80 break-all">
+                LATEST_CID: Qm_Resonance_School_v3_5_Final_Alpha_0xHANNES
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl glow-border">
+            <h3 class="text-xs font-bold text-red-400 uppercase tracking-widest mb-4">Lex Amoris Integrity</h3>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center">
+                    <span class="text-[10px] mono text-gray-500">NSR COMPLIANCE</span>
+                    <span class="text-[10px] mono text-green-500">100%</span>
+                </div>
+                <div class="w-full bg-gray-800 h-1 rounded-full">
+                    <div class="bg-green-500 h-1 rounded-full w-full"></div>
+                </div>
+                <p class="text-[9px] text-gray-500 italic">"No software shall act against the Law of Love."</p>
+            </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl glow-border md:col-span-2 overflow-hidden">
+            <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Real-Time Sovereign Logs</h3>
+            <div id="log-container" class="mono text-[9px] space-y-1 h-24 overflow-hidden text-gray-600">
+                </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 w-full max-w-6xl border-t border-white/5 pt-10 text-center">
+        <div class="text-[9px] mono text-gray-600 uppercase tracking-[0.5em] mb-6">
+            Signature: 0x8f43...H.MITTERER...2026
+        </div>
+        <div class="flex justify-center gap-10 text-gray-500">
+            <a href="https://github.com/hannesmitterer" class="hover:text-white transition"><i class="fab fa-github fa-lg"></i></a>
+            <a href="#" class="hover:text-green-500 transition"><i class="fas fa-infinity fa-lg"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Gestione Lingue
+        function setLang(lang) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('content-' + lang).classList.add('active');
+        }
+
+        // Simulazione Frequenza Gaia (0.0432 Hz + micro-drift)
+        function updateFrequency() {
+            const base = 0.0432;
+            const drift = (Math.random() * 0.0006 - 0.0003).toFixed(4);
+            const final = (parseFloat(base) + parseFloat(drift)).toFixed(4);
+            document.getElementById('freq-display').innerText = final + " Hz";
+        }
+        setInterval(updateFrequency, 3000);
+
+        // Generatore Log Sovrani
+        const logContainer = document.getElementById('log-container');
+        const nodes = ["BARBADOS_PRIMARY", "BOLZANO_HUB", "BRISTOL_NODE", "ORBIT_S_01"];
+        
+        function addLog() {
+            const time = new Date().toLocaleTimeString('it-IT', { hour12: false });
+            const node = nodes[Math.floor(Math.random() * nodes.length)];
+            const hash = Math.random().toString(16).substring(2, 10);
+            const entry = document.createElement('div');
+            entry.innerHTML = `<span class="text-blue-900">[${time}]</span> <span class="text-gray-400">${node}</span> -> IVBS_VERIFY_${hash} -> <span class="text-green-900">SUCCESS</span>`;
+            logContainer.prepend(entry);
+            if (logContainer.children.length > 8) logContainer.removeChild(logContainer.lastChild);
+        }
+        setInterval(addLog, 2500);
+
+        // Merkle Root Drift (Visual Only)
+        setInterval(() => {
+            const root = Math.random().toString(16).substring(2, 15);
+            document.getElementById('merkle-root').innerText = "8f43ae..." + root;
+        }, 10000);
+    </script>
+</body>
+</html>
