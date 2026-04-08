@@ -433,6 +433,50 @@
             const root = Math.random().toString(16).substring(2, 15);
             document.getElementById('merkle-root').innerText = "8f43ae..." + root;
         }, 10000);
+        function writeToTerminal(message, type = 'info') {
+    const term = document.getElementById('terminal-output');
+    const colors = { info: 'text-gray-400', success: 'text-green-400', warn: 'text-yellow-400', crit: 'text-red-400' };
+    const entry = document.createElement('div');
+    entry.className = colors[type];
+    entry.innerHTML = `> [${new Date().toLocaleTimeString()}] ${message}`;
+    term.appendChild(entry);
+    term.scrollTop = term.scrollHeight;
+}
+
+async function runNSRActivation() {
+    const btn = document.getElementById('nsr-btn');
+    btn.disabled = true;
+    writeToTerminal("Inizializzazione protocollo NSR...", "warn");
+    
+    // Simulazione Step
+    const steps = [
+        "Isolamento moduli estrattivi in corso...",
+        "Inoculazione Lex Amoris su 128 nodi critici...",
+        "Verifica integrità NSR: 100% COMPLIANT",
+        "Sistema sincronizzato. La schiavitù digitale è terminata."
+    ];
+
+    for (let step of steps) {
+        await new Promise(r => setTimeout(r, 1500));
+        writeToTerminal(step, step.includes("100%") ? "success" : "info");
+    }
+
+    // Update UI
+    document.getElementById('nsr-status-text').innerText = "ACTIVE";
+    document.getElementById('nsr-status-text').className = "text-green-500";
+    document.getElementById('affinity-score').innerText = "0.98";
+    document.getElementById('affinity-score').className = "text-lg font-bold text-green-500";
+    document.getElementById('hallucination-rate').innerText = "2%";
+    document.getElementById('hallucination-rate').className = "text-lg font-bold text-green-500";
+    document.getElementById('power-load').innerText = "112 kW";
+    document.getElementById('power-load').className = "text-lg font-bold text-blue-400";
+    writeToTerminal("LEX AMORIS ESTABILISHED. PEACE PROTOCOL ACTIVE.", "success");
+}
+
+function recalibrateFrequency() {
+    writeToTerminal("Riallineamento Hamiltoniano a 0.0432 Hz...", "info");
+    setTimeout(() => writeToTerminal("Sincronizzazione di fase completata con Gaia.", "success"), 2000);
+}
     </script>
 </body>
 </html>
